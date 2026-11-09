@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.*;
 
 public class Deck {
+	
 	private ArrayList<Card> fortuneDeck;
 	private Card currentCard;
 	
@@ -78,16 +79,89 @@ public class Deck {
 		return currentCard;
 	}
 	
-	//public void shuffle() {
+	public void cardAction() {
+		if(currentCard.getName().equals("A Good Start")) {
+			
+		}
+		if(currentCard.getName().equals("An Opportnistic Moment")) {
+			
+		}
+		if(currentCard.getName().equals("Rat Infestation")) {
+			
+		}
+		if(currentCard.getName().equals("Choose Wisely")) {
+			
+		}
+		if(currentCard.getName().equals("You Only Get To Choose One")) {
+			
+		}
+		if(currentCard.getName().equals("Roll The Die")) {
+			
+		}
+		if(currentCard.getName().equals("Beginner's Bonus")) {
+			
+		}
+		if(currentCard.getName().equals("Rats Are Your Friends")) {
+			
+		}
+		if(currentCard.getName().equals("Wheel And Deal")) {
+			
+		}
+		if(currentCard.getName().equals("Less Is More")) {
+			
+		}
+		if(currentCard.getName().equals("Just In Time")) {
+			
+		}
+		if(currentCard.getName().equals("The Pot Is Filling Up")) {
+			
+		}
+		if(currentCard.getName().equals("Charity")) {
+			
+		}
+		if(currentCard.getName().equals("The Pot is Full")) {
+			
+		}
+		if(currentCard.getName().equals("Well Stirred")) {
+			
+		}
+		if(currentCard.getName().equals("Living In Luxury")) {
+			
+		}
+		if(currentCard.getName().equals("A Second Chance")) {
+			
+		}
+		if(currentCard.getName().equals("Strong Ingredient")) {
+			
+		}
+		if(currentCard.getName().equals("Seasoned Perfectly")) {
+			
+		}
+		if(currentCard.getName().equals("Schadenfreude")) {
+			
+		}
+		if(currentCard.getName().equals("It's Shining Extra Bright")) {
+			
+		}
+		if(currentCard.getName().equals("Lucky Devil")) {
+			
+		}
+		if(currentCard.getName().equals("Pumpkin Patch Party")) {
+			
+		}
+		if(currentCard.getName().equals("Magic Potion")) {
+			
+		}
 		
-	//}
+		
+	}
 	
 	public Card getCurrentCard() {
 		
 		return currentCard;
 	}
 	
-	public void drawDeck(Graphics g) {
-		
+	public BufferedImage drawDeck() {
+		return currentCard.drawCard();
 	}
 }
