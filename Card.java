@@ -17,7 +17,7 @@ public class Card {
 		this.description=description;
 		
 		try {
-			image= ImageIO.read(Card.class.getResource("/fortuneCards/"+name));
+			image= ImageIO.read(Card.class.getResource("/fortuneCard/"+name));
 			
 		} 
 		catch(Exception e) {
@@ -47,8 +47,6 @@ public class Card {
 	//}
 	
 	public BufferedImage drawCard() { //(Graphics g???){
-		
-		
 		return image;
 	}
 	
