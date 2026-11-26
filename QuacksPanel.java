@@ -65,7 +65,6 @@ public class QuacksPanel extends JPanel implements MouseListener {
         Bag bag = player.getBag();
         bag.getChips().clear();
 
-        // Standard starting bag: White (1, 1, 1, 2, 2, 3), Green (1), Orange (1)
         bag.addChip(new IngredientChip("white", 1));
         bag.addChip(new IngredientChip("white", 1));
         bag.addChip(new IngredientChip("white", 1));
@@ -123,7 +122,6 @@ public class QuacksPanel extends JPanel implements MouseListener {
             playerFinishedRound[i] = false;
         }
 
-        // Apply rat-tail catch-up starting on Round 2
         if (currentRound >= 2) {
             int leaderScore = scoreboard.getLeaderScore();
             for (int i = 0; i < NUM_PLAYERS; i++) {
@@ -155,7 +153,6 @@ public class QuacksPanel extends JPanel implements MouseListener {
             int baseCoins = Math.max(2, pot.getCurrentPotPosition() / 2);
 
             if (pot.potExploded()) {
-                // Exploded pot: take either victory points or coins (defaulting to coins here)
                 pot.setCoinsCount(baseCoins);
             } else {
                 players[i].addPoints(basePoints);
@@ -363,17 +360,14 @@ public class QuacksPanel extends JPanel implements MouseListener {
             return;
         }
 
-        // Board & 4 player pots
         for (int i = 0; i < NUM_PLAYERS; i++) {
             players[i].getPot().drawPot(g, i + 1);
             players[i].drawPlayer(g);
         }
 
-        // Right-hand parchment sidebar
         g.setColor(new Color(228, 205, 162));
         g.fillRect(1510, 0, 410, PANEL_HEIGHT);
 
-        // Top-right help '?' icon
         g.setColor(Color.BLACK);
         g.setFont(new Font("SansSerif", Font.BOLD, 54));
         g.drawString("?", 1850, 70);
