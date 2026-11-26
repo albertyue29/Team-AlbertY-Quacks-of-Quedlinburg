@@ -1,167 +1,69 @@
-import java.awt.*;
-import java.awt.image.*;
-import javax.swing.*;
-import javax.imageio.ImageIO;
-import java.io.*;
-import java.util.*;
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Deck {
-	
-	private ArrayList<Card> fortuneDeck;
-	private Card currentCard;
-	
-	public Deck () {
-		
-		
-		fortuneDeck.add(new Card("A Good Start", "P"));
-		fortuneDeck.add(new Card("An Opportnistic Moment", "P"));
-		fortuneDeck.add(new Card("Rat Infestation", "P"));
-		fortuneDeck.add(new Card("Choose Wisely", "P"));
-		fortuneDeck.add(new Card("You Only Get To Choose One", "P"));
-		fortuneDeck.add(new Card("Roll The Die", "P"));
-		fortuneDeck.add(new Card("Beginner's Bonus", "P"));
-		fortuneDeck.add(new Card("Rats Are Your Friends", "P"));
-		fortuneDeck.add(new Card("Wheel And Deal", "P"));
-		fortuneDeck.add(new Card("Less Is More", "P"));
-		fortuneDeck.add(new Card("Just In Time", "P"));
-		fortuneDeck.add(new Card("The Pot Is Filling Up", "P"));
-		fortuneDeck.add(new Card("Charity", "P"));
-		
-		fortuneDeck.add(new Card("The Pot is Full", "B"));
-		fortuneDeck.add(new Card("Well Stirred", "B"));
-		fortuneDeck.add(new Card("Living In Luxury", "B") );
-		fortuneDeck.add(new Card("A Second Chance", "B"));
-		fortuneDeck.add(new Card("Strong Ingredient", "B"));
-		fortuneDeck.add(new Card("Seasoned Perfectly", "B"));
-		fortuneDeck.add(new Card("Schadenfreude", "B"));
-		fortuneDeck.add(new Card("It's Shining Extra Bright", "B"));
-		fortuneDeck.add(new Card("Lucky Devil", "B"));
-		fortuneDeck.add(new Card("Pumpkin Patch Party", "B"));
-		fortuneDeck.add(new Card("Magic Potion", "B"));
-		
-		
-		
-		
-			/*	//Card goodStart = new Card("A Good Start", "P")
-				//Card opportunistic = new Card("An Opportnistic Moment", "P");
-				//Card ratInfestation = new Card("Rat Infestation", "P");
-				//Card chooseWisely = new Card("Choose Wisely", "P");
-				//Card onlyChooseOne = new Card("You Only Get To Choose One", "P");
-				//Card rollDie = new Card("Roll The Die", "P");
-				//Card beginnerBonus = new Card("Beginner's Bonus", "P");
-				Card ratsAreFriends = new Card("Rats Are Your Friends", "P");
-				Card wheelDeal = new Card("Wheel And Deal", "P");
-				Card lessMore = new Card("Less Is More", "P");
-				Card justInTime = new Card("Just In Time", "P");
-				Card thePotIsFillingUp = new Card("The Pot Is Filling Up", "P");
-				Card charity = new Card("Charity", "P");
-				
-				Card thePotIsFull = new Card("The Pot is Full", "B");
-				Card wellStirred = new Card("Well Stirred", "B");
-				Card livingLuxury = new Card("Living In Luxury", "B");
-				Card secondChance = new Card("A Second Chance", "B");
-				Card strongIngredient = new Card("Strong Ingredient", "B");
-				Card seasonePerfectly = new Card("Seasoned Perfectly", "B");
-				Card schadenfreude = new Card("Schadenfreude", "B");
-				Card shiningBright = new Card("It's Shining Extra Bright", "B");
-				Card luckyDevil = new Card("Lucky Devil", "B");
-				Card pumpkinParty = new Card("Pumpkin Patch Party", "B");
-				Card magicPotion = new Card("Magic Potion", "B");
-		
-		*/
-	}
-	
-	public Card drawCard() {
-		int randomIndex = (int) (Math.random() * fortuneDeck.size());
-		currentCard = fortuneDeck.get(randomIndex);
-		fortuneDeck.remove(randomIndex);
-		
-		return currentCard;
-	}
-	
-	public void cardAction() {
-		if(currentCard.getName().equals("A Good Start")) {
-			
-		}
-		if(currentCard.getName().equals("An Opportnistic Moment")) {
-			
-		}
-		if(currentCard.getName().equals("Rat Infestation")) {
-			
-		}
-		if(currentCard.getName().equals("Choose Wisely")) {
-			
-		}
-		if(currentCard.getName().equals("You Only Get To Choose One")) {
-			
-		}
-		if(currentCard.getName().equals("Roll The Die")) {
-			
-		}
-		if(currentCard.getName().equals("Beginner's Bonus")) {
-			
-		}
-		if(currentCard.getName().equals("Rats Are Your Friends")) {
-			
-		}
-		if(currentCard.getName().equals("Wheel And Deal")) {
-			
-		}
-		if(currentCard.getName().equals("Less Is More")) {
-			
-		}
-		if(currentCard.getName().equals("Just In Time")) {
-			
-		}
-		if(currentCard.getName().equals("The Pot Is Filling Up")) {
-			
-		}
-		if(currentCard.getName().equals("Charity")) {
-			
-		}
-		if(currentCard.getName().equals("The Pot is Full")) {
-			
-		}
-		if(currentCard.getName().equals("Well Stirred")) {
-			
-		}
-		if(currentCard.getName().equals("Living In Luxury")) {
-			
-		}
-		if(currentCard.getName().equals("A Second Chance")) {
-			
-		}
-		if(currentCard.getName().equals("Strong Ingredient")) {
-			
-		}
-		if(currentCard.getName().equals("Seasoned Perfectly")) {
-			
-		}
-		if(currentCard.getName().equals("Schadenfreude")) {
-			
-		}
-		if(currentCard.getName().equals("It's Shining Extra Bright")) {
-			
-		}
-		if(currentCard.getName().equals("Lucky Devil")) {
-			
-		}
-		if(currentCard.getName().equals("Pumpkin Patch Party")) {
-			
-		}
-		if(currentCard.getName().equals("Magic Potion")) {
-			
-		}
-		
-		
-	}
-	
-	public Card getCurrentCard() {
-		
-		return currentCard;
-	}
-	
-	public BufferedImage drawDeck() {
-		return currentCard.drawCard();
-	}
+    private ArrayList<Card> fortuneDeck;
+    private Card currentCard;
+
+    public Deck() {
+        this.fortuneDeck = new ArrayList<>();
+        this.currentCard = null;
+        initializeCards();
+        shuffle();
+    }
+
+    private void initializeCards() {
+        // Purple Fortune Cards
+        fortuneDeck.add(new Card("A Good Start", "Purple", "Choose: Use your rat stone normally OR pass up on 1-3 rat tails and take that many rubies (1-3) instead."));
+        fortuneDeck.add(new Card("An Opportunistic Moment", "Purple", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("Rat Infestation", "Purple", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("Choose Wisely", "Purple", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("You Only Get To Choose One", "Purple", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("Roll The Die", "Purple", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("Beginner's Bonus", "Purple", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("Rats Are Your Friends", "Purple", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("Wheel And Deal", "Purple", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("Less Is More", "Purple", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("Just In Time", "Purple", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("The Pot Is Filling Up", "Purple", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("Charity", "Purple", "Apply round fortune effect."));
+
+        // Blue Fortune Cards 
+        fortuneDeck.add(new Card("The Pot is Full", "Blue", "Any player who gets to roll the die this round rolls twice."));
+        fortuneDeck.add(new Card("Well Stirred", "Blue", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("Living In Luxury", "Blue", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("A Second Chance", "Blue", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("Strong Ingredient", "Blue", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("Seasoned Perfectly", "Blue", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("Schadenfreude", "Blue", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("It's Shining Extra Bright", "Blue", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("Lucky Devil", "Blue", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("Pumpkin Patch Party", "Blue", "Apply round fortune effect."));
+        fortuneDeck.add(new Card("Magic Potion", "Blue", "Apply round fortune effect."));
+    }
+
+    public void shuffle() {
+        Collections.shuffle(fortuneDeck);
+    }
+
+    public Card drawCard() {
+        if (fortuneDeck.isEmpty()) {
+            return null;
+        }
+        int randomIndex = (int) (Math.random() * fortuneDeck.size());
+        currentCard = fortuneDeck.remove(randomIndex);
+        return currentCard;
+    }
+
+    public Card getCurrentCard() {
+        return currentCard;
+    }
+
+    public void drawDeck(Graphics g) {
+        if (g == null || currentCard == null) {
+            return;
+        }
+        currentCard.drawCard(g, false);
+    }
 }
