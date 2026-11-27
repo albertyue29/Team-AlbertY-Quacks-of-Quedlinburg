@@ -2,22 +2,18 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.InputStream;
-import javax.imageio.ImageIO;
 
 public class IngredientChip {
+    private static final int CHIP_SIZE = 46;
+
     private String color;
     private int val;
     private String name;
-    private BufferedImage chipImage;
 
     public IngredientChip(String color, int val) {
         this.color = (color == null) ? "" : color.trim();
         this.val = val;
         this.name = buildChipName(this.color, val);
-        this.chipImage = loadChipImage(this.color, val);
     }
 
     private String buildChipName(String color, int val) {
@@ -44,35 +40,6 @@ public class IngredientChip {
         }
     }
 
-    private BufferedImage loadChipImage(String color, int val) {
-        String lower = color.toLowerCase();
-        String[] candidatePaths = {
-            "/chips/" + lower + "_" + val + ".png",
-            "/chips/" + lower + val + ".png",
-            "/chips/" + lower + "_" + val + ".jpg",
-            "/ingredientChips/" + lower + "_" + val + ".png"
-        };
-
-        for (String path : candidatePaths) {
-            try (InputStream is = IngredientChip.class.getResourceAsStream(path)) {
-                if (is != null) {
-                    return ImageIO.read(is);
-                }
-            } catch (Exception ignored) {
-            }
-
-            File localFile = new File("src" + path);
-            if (localFile.exists()) {
-                try {
-                    return ImageIO.read(localFile);
-                } catch (Exception ignored) {
-                }
-            }
-        }
-
-        return null;
-    }
-
     public String getColor() {
         return color;
     }
@@ -90,25 +57,20 @@ public class IngredientChip {
             return;
         }
 
-        int size = 46;
-
-        if (chipImage != null) {
-            g.drawImage(chipImage, x, y, size, size, null);
-            return;
-        }
-
+        // Colored circle with outline
         g.setColor(resolveChipColor());
-        g.fillOval(x, y, size, size);
+        g.fillOval(x, y, CHIP_SIZE, CHIP_SIZE);
 
         g.setColor(new Color(35, 25, 20));
-        g.drawOval(x, y, size, size);
+        g.drawOval(x, y, CHIP_SIZE, CHIP_SIZE);
 
+        // Centered chip value
         g.setColor(needsLightText() ? Color.WHITE : Color.BLACK);
         g.setFont(new Font("SansSerif", Font.BOLD, 16));
         String label = String.valueOf(val);
         FontMetrics fm = g.getFontMetrics();
-        int textX = x + (size - fm.stringWidth(label)) / 2;
-        int textY = y + ((size - fm.getHeight()) / 2) + fm.getAscent();
+        int textX = x + (CHIP_SIZE - fm.stringWidth(label)) / 2;
+        int textY = y + ((CHIP_SIZE - fm.getHeight()) / 2) + fm.getAscent();
         g.drawString(label, textX, textY);
     }
 
